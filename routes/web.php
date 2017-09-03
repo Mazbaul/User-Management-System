@@ -1,5 +1,5 @@
 <?php
-Route::get('/', 'Auth\RegisterController@showRegistrationForm');
+Route::get('/', 'HomeController@index');
 
 
 // Authentication Routes...
