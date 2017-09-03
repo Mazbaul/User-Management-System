@@ -1,8 +1,8 @@
 ## Laravel User Management System
 
-Simple mini-project created during live-coding
+Simple mini-project created for User Management. You can Create Superadmin, admin, Normal User And can Create User you want with different roles and permissions Using Just UI
 
-###
+### Features
 
 - admin panel
 - user creation using UI
@@ -10,6 +10,7 @@ Simple mini-project created during live-coding
 - create user using UI
 - create roles using UI
 - create permissions using UI
+- Create User you want with different roles and permissions Using Just UI
 
 ## How to Install
 
