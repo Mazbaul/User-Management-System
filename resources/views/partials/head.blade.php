@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <title>
-    {{ trans('global.global_title') }}
+    UMS
 </title>
 
 <meta http-equiv="X-UA-Compatible"
