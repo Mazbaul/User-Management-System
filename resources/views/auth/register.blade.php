@@ -1,3 +1,5 @@
+@extends('layouts.home')
+
 @extends('layouts.auth')
 
 @section('content')

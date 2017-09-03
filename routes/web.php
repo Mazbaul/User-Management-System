@@ -1,5 +1,5 @@
 <?php
-Route::get('/', 'HomeController@index');
+Route::get('/', 'Auth\RegisterController@showRegistrationForm');
 
 
 // Authentication Routes...
@@ -29,5 +29,5 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin', 'as' => 'admin.'],
     Route::post('roles_mass_destroy', ['uses' => 'Admin\RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     Route::resource('users', 'Admin\UsersController');
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
-    
+
 });

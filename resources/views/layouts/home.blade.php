@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ $page_title or 'Quick LMS' }}</title>
+    <title>{{ $page_title or 'EASY USER MANAGEMENT SYSTEM' }}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +41,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">Quick LMS</a>
+                        <a class="navbar-brand" href="/">EASY UMS</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -62,10 +62,10 @@
                 <div class="col-lg-6 text-right" style="padding-top: 10px">
                     @if (Auth::check())
                         <div style="color:white">
-                            Logged in as {{ Auth::user()->email }}
+                             {{ Auth::user()->name }}
                             <form action="{{ route('auth.logout') }}" method="post">
                                 {{ csrf_field() }}
-                                <input type="submit" value="Logout" class="btn btn-info">
+                                <input type="submit" value="Logout" class="btn btn-sm btn-info">
                             </form>
                         </div>
                     @else
@@ -116,7 +116,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Quick LMS 2017</p>
+                    <p>Copyright &copy; Easy UMS 2017</p>
                 </div>
             </div>
         </footer>
