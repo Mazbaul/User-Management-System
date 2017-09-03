@@ -12,6 +12,9 @@ Simple mini-project created for User Management. You can Create Superadmin, admi
 - create permissions using UI
 - Create User you want with different roles and permissions Using Just UI
 
+Note:admin login email:admin@admin.com Password:password
+
+
 ## How to Install
 
 - git clonehttps://github.com/bestmomo/laravel5-example.gitprojectname
