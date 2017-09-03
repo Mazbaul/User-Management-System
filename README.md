@@ -4,12 +4,12 @@ Simple mini-project created during live-coding
 
 ###
 
---admin panel
---user creation using UI
---assigning roles and permission using Ui
---create user using UI
---create roles using UI
---create permissions using UI
+- admin panel
+- user creation using UI
+- assigning roles and permission using Ui
+- create user using UI
+- create roles using UI
+- create permissions using UI
 
 ## How to Install
 
