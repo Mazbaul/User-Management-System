@@ -1,16 +1,26 @@
-## Laravel Learning Management System
+## Laravel User Management System
 
-Simple mini-project created during live-coding sessions in 15 lessons. 
-[Watch them on YouTube](https://www.youtube.com/watch?v=8c107aufU9s&list=PLdXLsjL7A9k0NlUGL9M7ah9Fnvo3HybRl)
+Simple mini-project created during live-coding
 
-### Front-end view 
+###
 
-![Front-end view](http://laraveldaily.com/wp-content/uploads/2017/08/Screen-Shot-2017-08-23-at-1.34.22-PM.png)
+--admin panel
+--user creation using UI
+--assigning roles and permission using Ui
+--create user using UI
+--create roles using UI
+--create permissions using UI
 
-### Back-end view 
-Generated with [QuickAdminPanel](https://quickadminpanel.com)
+## How to Install
 
-![Back-end view](http://laraveldaily.com/wp-content/uploads/2017/08/Screen-Shot-2017-08-23-at-1.34.35-PM.png)
+-- git clone https://github.com/bestmomo/laravel5-example.gitprojectname
+--cd projectname
+--composer install
+--php artisan key:generate
+--Create a database and inform .env
+--php artisan migrate --seed to create and      populate tables
+--php artisan serve to start the app on http://localhost:8000/
+
 
 ### License
 
