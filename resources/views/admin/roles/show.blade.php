@@ -1,20 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.roles.title')</h3>
+    <h3 class="page-title">@lang('global.roles.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('quickadmin.qa_view')
+            @lang('global.app_view')
         </div>
 
-        <div class="panel-body table-responsive">
+        <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>@lang('quickadmin.roles.fields.title')</th>
-                            <td field-key='title'>{{ $role->title }}</td>
+                            <th>@lang('global.roles.fields.title')</th>
+                            <td>{{ $role->title }}</td>
+                        </tr>
+                        <tr>
+                            <th>@lang('global.roles.fields.permission')</th>
+                            <td>
+                                @foreach ($role->permission as $singlePermission)
+                                    <span class="label label-info label-many">{{ $singlePermission->title }}</span>
+                                @endforeach
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -31,9 +39,9 @@
 <table class="table table-bordered table-striped {{ count($users) > 0 ? 'datatable' : '' }}">
     <thead>
         <tr>
-            <th>@lang('quickadmin.users.fields.name')</th>
-                        <th>@lang('quickadmin.users.fields.email')</th>
-                        <th>@lang('quickadmin.users.fields.role')</th>
+            <th>@lang('global.users.fields.name')</th>
+                        <th>@lang('global.users.fields.email')</th>
+                        <th>@lang('global.users.fields.role')</th>
                                                 <th>&nbsp;</th>
 
         </tr>
@@ -43,23 +51,27 @@
         @if (count($users) > 0)
             @foreach ($users as $user)
                 <tr data-entry-id="{{ $user->id }}">
-                    <td field-key='name'>{{ $user->name }}</td>
-                                <td field-key='email'>{{ $user->email }}</td>
-                                <td field-key='role'>{{ $user->role->title or '' }}</td>
+                    <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    @foreach ($user->role as $singleRole)
+                                        <span class="label label-info label-many">{{ $singleRole->title }}</span>
+                                    @endforeach
+                                </td>
                                                                 <td>
                                     @can('user_view')
-                                    <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.users.show',[$user->id]) }}" class="btn btn-xs btn-primary">@lang('global.app_view')</a>
                                     @endcan
                                     @can('user_edit')
-                                    <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    <a href="{{ route('admin.users.edit',[$user->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('user_delete')
 {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
-                                        'onsubmit' => "return confirm('".trans("quickadmin.qa_are_you_sure")."');",
+                                        'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
                                         'route' => ['admin.users.destroy', $user->id])) !!}
-                                    {!! Form::submit(trans('quickadmin.qa_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
+                                    {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
                                 </td>
@@ -68,7 +80,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="10">@lang('quickadmin.qa_no_entries_in_table')</td>
+                <td colspan="9">@lang('global.app_no_entries_in_table')</td>
             </tr>
         @endif
     </tbody>
@@ -78,7 +90,7 @@
 
             <p>&nbsp;</p>
 
-            <a href="{{ route('admin.roles.index') }}" class="btn btn-default">@lang('quickadmin.qa_back_to_list')</a>
+            <a href="{{ route('admin.roles.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
         </div>
     </div>
 @stop

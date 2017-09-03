@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.roles.title')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.roles.store']]) !!}
+    <h3 class="page-title">@lang('global.permissions.title')</h3>
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.permissions.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -18,18 +18,6 @@
                     @if($errors->has('title'))
                         <p class="help-block">
                             {{ $errors->first('title') }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    {!! Form::label('permission', 'Permissions*', ['class' => 'control-label']) !!}
-                    {!! Form::select('permission[]', $permissions, old('permission'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
-                    <p class="help-block"></p>
-                    @if($errors->has('permission'))
-                        <p class="help-block">
-                            {{ $errors->first('permission') }}
                         </p>
                     @endif
                 </div>

@@ -1,46 +1,48 @@
-@inject('request', 'Illuminate\Http\Request')
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.roles.title')</h3>
-    @can('role_create')
-    <p>
-        <a href="{{ route('admin.roles.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
-        
-    </p>
-    @endcan
-
-    
+    <h3 class="page-title">@lang('global.permissions.title')</h3>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('global.app_list')
+            @lang('global.app_view')
         </div>
 
-        <div class="panel-body table-responsive">
-            <table class="table table-bordered table-striped {{ count($roles) > 0 ? 'datatable' : '' }} @can('role_delete') dt-select @endcan">
-                <thead>
-                    <tr>
-                        @can('role_delete')
-                            <th style="text-align:center;"><input type="checkbox" id="select-all" /></th>
-                        @endcan
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>@lang('global.permissions.fields.title')</th>
+                            <td>{{ $permission->title }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div><!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    
+<li role="presentation" class="active"><a href="#roles" aria-controls="roles" role="tab" data-toggle="tab">Roles</a></li>
+</ul>
 
-                        <th>@lang('global.roles.fields.title')</th>
+<!-- Tab panes -->
+<div class="tab-content">
+    
+<div role="tabpanel" class="tab-pane active" id="roles">
+<table class="table table-bordered table-striped {{ count($roles) > 0 ? 'datatable' : '' }}">
+    <thead>
+        <tr>
+            <th>@lang('global.roles.fields.title')</th>
                         <th>@lang('global.roles.fields.permission')</th>
                                                 <th>&nbsp;</th>
 
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    @if (count($roles) > 0)
-                        @foreach ($roles as $role)
-                            <tr data-entry-id="{{ $role->id }}">
-                                @can('role_delete')
-                                    <td></td>
-                                @endcan
+        </tr>
+    </thead>
 
-                                <td>{{ $role->title }}</td>
+    <tbody>
+        @if (count($roles) > 0)
+            @foreach ($roles as $role)
+                <tr data-entry-id="{{ $role->id }}">
+                    <td>{{ $role->title }}</td>
                                 <td>
                                     @foreach ($role->permission as $singlePermission)
                                         <span class="label label-info label-many">{{ $singlePermission->title }}</span>
@@ -64,24 +66,21 @@
                                     @endcan
                                 </td>
 
-                            </tr>
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="6">@lang('global.app_no_entries_in_table')</td>
-                        </tr>
-                    @endif
-                </tbody>
-            </table>
+                </tr>
+            @endforeach
+        @else
+            <tr>
+                <td colspan="6">@lang('global.app_no_entries_in_table')</td>
+            </tr>
+        @endif
+    </tbody>
+</table>
+</div>
+</div>
+
+            <p>&nbsp;</p>
+
+            <a href="{{ route('admin.permissions.index') }}" class="btn btn-default">@lang('global.app_back_to_list')</a>
         </div>
     </div>
 @stop
-
-@section('javascript') 
-    <script>
-        @can('role_delete')
-            window.route_mass_crud_entries_destroy = '{{ route('admin.roles.mass_destroy') }}';
-        @endcan
-
-    </script>
-@endsection

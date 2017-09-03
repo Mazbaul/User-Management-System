@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('quickadmin.users.title')</h3>
+    <h3 class="page-title">@lang('global.users.title')</h3>
     {!! Form::open(['method' => 'POST', 'route' => ['admin.users.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('quickadmin.qa_create')
+            @lang('global.app_create')
         </div>
         
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('name', trans('quickadmin.users.fields.name'), ['class' => 'control-label']) !!}
+                    {!! Form::label('name', 'Name*', ['class' => 'control-label']) !!}
                     {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('name'))
@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('email', trans('quickadmin.users.fields.email'), ['class' => 'control-label']) !!}
+                    {!! Form::label('email', 'Email*', ['class' => 'control-label']) !!}
                     {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('email'))
@@ -36,7 +36,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('password', trans('quickadmin.users.fields.password'), ['class' => 'control-label']) !!}
+                    {!! Form::label('password', 'Password*', ['class' => 'control-label']) !!}
                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('password'))
@@ -48,12 +48,12 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('role_id', trans('quickadmin.users.fields.role'), ['class' => 'control-label']) !!}
-                    {!! Form::select('role_id', $roles, old('role_id'), ['class' => 'form-control select2', 'required' => '']) !!}
+                    {!! Form::label('role', 'Role*', ['class' => 'control-label']) !!}
+                    {!! Form::select('role[]', $roles, old('role'), ['class' => 'form-control select2', 'multiple' => 'multiple', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    @if($errors->has('role_id'))
+                    @if($errors->has('role'))
                         <p class="help-block">
-                            {{ $errors->first('role_id') }}
+                            {{ $errors->first('role') }}
                         </p>
                     @endif
                 </div>
@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit(trans('global.app_save'), ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 @stop
 
