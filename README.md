@@ -13,7 +13,7 @@ Simple mini-project created during live-coding
 
 ## How to Install
 
--- git clone https://github.com/bestmomo/laravel5-example.gitprojectname
+# git clonehttps://github.com/bestmomo/laravel5-example.gitprojectname
 --cd projectname
 --composer install
 --php artisan key:generate
