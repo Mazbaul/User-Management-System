@@ -1,9 +1,9 @@
 <div class="page-header-inner">
     <div class="page-header-inner">
         <div class="navbar-header">
-            <a href="{{ url('/') }}"
+            <a href="{{ url('/admin/home') }}"
                class="navbar-brand">
-                @lang('quickadmin.quickadmin_title')
+                @trans('global.global_title')
             </a>
         </div>
         <a href="javascript:;"
@@ -14,9 +14,8 @@
 
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
-                
+
             </ul>
         </div>
     </div>
 </div>
-

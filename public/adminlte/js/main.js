@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+    var handleCheckboxes = function (html, rowIndex, colIndex, cellNode) {
+        var $cellNode = $(cellNode);
+        var $check = $cellNode.find(':checked');
+        return ($check.length) ? ($check.val() == 1 ? 'Yes' : 'No') : $cellNode.text();
+    };
+
     var activeSub = $(document).find('.active-sub');
     if (activeSub.length > 0) {
         activeSub.parent().show();
@@ -16,31 +22,46 @@ $(document).ready(function () {
             {
                 extend: 'copy',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':visible',
+                    format: {
+                        body: handleCheckboxes
+                    }
                 }
             },
             {
                 extend: 'csv',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':visible',
+                    format: {
+                        body: handleCheckboxes
+                    }
                 }
             },
             {
                 extend: 'excel',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':visible',
+                    format: {
+                        body: handleCheckboxes
+                    }
                 }
             },
             {
                 extend: 'pdf',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':visible',
+                    format: {
+                        body: handleCheckboxes
+                    }
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: ':visible'
+                    columns: ':visible',
+                    format: {
+                        body: handleCheckboxes
+                    }
                 }
             },
             'colvis'

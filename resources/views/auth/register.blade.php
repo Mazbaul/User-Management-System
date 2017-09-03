@@ -9,6 +9,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="redirect_url" value="{{ request('redirect_url', '/') }}">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
@@ -65,6 +66,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+                                <a href="{{ route('auth.login') }}">Existing user? Log in here</a>
                             </div>
                         </div>
                     </form>

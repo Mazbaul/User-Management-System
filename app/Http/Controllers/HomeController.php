@@ -2,21 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -24,6 +13,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $purchased_courses = NULL;
+        if (\Auth::check()) {
+            $purchased_courses = Course::whereHas('students', function($query) {
+                $query->where('id', \Auth::id());
+            })
+            ->with('lessons')
+            ->orderBy('id', 'desc')
+            ->get();
+        }
+        //$courses = Course::where('published', 1)->orderBy('id', 'desc')->get();
+        return view('index');
     }
 }

@@ -38,8 +38,7 @@ class UsersController extends Controller
         if (! Gate::allows('user_create')) {
             return abort(401);
         }
-        
-        $roles = \App\Role::get()->pluck('title', 'id')->prepend('Please select', '');
+        $roles = \App\Role::get()->pluck('title', 'id');
 
         return view('admin.users.create', compact('roles'));
     }
@@ -56,6 +55,7 @@ class UsersController extends Controller
             return abort(401);
         }
         $user = User::create($request->all());
+        $user->role()->sync(array_filter((array)$request->input('role')));
 
 
 
@@ -74,8 +74,7 @@ class UsersController extends Controller
         if (! Gate::allows('user_edit')) {
             return abort(401);
         }
-        
-        $roles = \App\Role::get()->pluck('title', 'id')->prepend('Please select', '');
+        $roles = \App\Role::get()->pluck('title', 'id');
 
         $user = User::findOrFail($id);
 
@@ -96,6 +95,7 @@ class UsersController extends Controller
         }
         $user = User::findOrFail($id);
         $user->update($request->all());
+        $user->role()->sync(array_filter((array)$request->input('role')));
 
 
 
@@ -114,9 +114,14 @@ class UsersController extends Controller
         if (! Gate::allows('user_view')) {
             return abort(401);
         }
+        $roles = \App\Role::get()->pluck('title', 'id');$courses = \App\Course::whereHas('teachers',
+                    function ($query) use ($id) {
+                        $query->where('id', $id);
+                    })->get();
+
         $user = User::findOrFail($id);
 
-        return view('admin.users.show', compact('user'));
+        return view('admin.users.show', compact('user', 'courses'));
     }
 
 

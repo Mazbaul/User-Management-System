@@ -15,7 +15,7 @@
         <!-- If no success message in flash session show change password form  -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                @lang('quickadmin.qa_edit')
+                @lang('global.app_edit')
             </div>
 
             <div class="panel-body">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        {!! Form::submit(trans('quickadmin.qa_save'), ['class' => 'btn btn-danger']) !!}
+        {!! Form::submit(trans('global.app_save'), ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     @endif
 @stop

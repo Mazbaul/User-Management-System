@@ -8,7 +8,7 @@
             <li class="{{ $request->segment(1) == 'home' ? 'active' : '' }}">
                 <a href="{{ url('/') }}">
                     <i class="fa fa-wrench"></i>
-                    <span class="title">@lang('quickadmin.qa_dashboard')</span>
+                    <span class="title">@lang('global.app_dashboard')</span>
                 </a>
             </li>
 
@@ -17,13 +17,14 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-users"></i>
-                    <span class="title">@lang('quickadmin.user-management.title')</span>
+                    <span class="title">@lang('global.user-management.title')</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                  @can('permission_access')
+
+                @can('permission_access')
                 <li class="{{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.permissions.index') }}">
                             <i class="fa fa-briefcase"></i>
@@ -38,7 +39,7 @@
                         <a href="{{ route('admin.roles.index') }}">
                             <i class="fa fa-briefcase"></i>
                             <span class="title">
-                                @lang('quickadmin.roles.title')
+                                @lang('global.roles.title')
                             </span>
                         </a>
                     </li>
@@ -48,7 +49,7 @@
                         <a href="{{ route('admin.users.index') }}">
                             <i class="fa fa-user"></i>
                             <span class="title">
-                                @lang('quickadmin.users.title')
+                                @lang('global.users.title')
                             </span>
                         </a>
                     </li>
@@ -56,7 +57,7 @@
                 </ul>
             </li>
             @endcan
-
+          
 
 
 
@@ -71,12 +72,12 @@
             <li>
                 <a href="#logout" onclick="$('#logout').submit();">
                     <i class="fa fa-arrow-left"></i>
-                    <span class="title">@lang('quickadmin.qa_logout')</span>
+                    <span class="title">@lang('global.app_logout')</span>
                 </a>
             </li>
         </ul>
     </section>
 </aside>
 {!! Form::open(['route' => 'auth.logout', 'style' => 'display:none;', 'id' => 'logout']) !!}
-<button type="submit">@lang('quickadmin.logout')</button>
+<button type="submit">@lang('global.logout')</button>
 {!! Form::close() !!}

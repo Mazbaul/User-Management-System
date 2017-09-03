@@ -38,7 +38,9 @@ class RolesController extends Controller
         if (! Gate::allows('role_create')) {
             return abort(401);
         }
-        return view('admin.roles.create');
+        $permissions = \App\Permission::get()->pluck('title', 'id');
+
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -53,6 +55,7 @@ class RolesController extends Controller
             return abort(401);
         }
         $role = Role::create($request->all());
+        $role->permission()->sync(array_filter((array)$request->input('permission')));
 
 
 
@@ -71,9 +74,11 @@ class RolesController extends Controller
         if (! Gate::allows('role_edit')) {
             return abort(401);
         }
+        $permissions = \App\Permission::get()->pluck('title', 'id');
+
         $role = Role::findOrFail($id);
 
-        return view('admin.roles.edit', compact('role'));
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -90,6 +95,7 @@ class RolesController extends Controller
         }
         $role = Role::findOrFail($id);
         $role->update($request->all());
+        $role->permission()->sync(array_filter((array)$request->input('permission')));
 
 
 
@@ -108,7 +114,10 @@ class RolesController extends Controller
         if (! Gate::allows('role_view')) {
             return abort(401);
         }
-        $users = \App\User::where('role_id', $id)->get();
+        $permissions = \App\Permission::get()->pluck('title', 'id');$users = \App\User::whereHas('role',
+                    function ($query) use ($id) {
+                        $query->where('id', $id);
+                    })->get();
 
         $role = Role::findOrFail($id);
 

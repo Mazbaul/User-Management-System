@@ -13,12 +13,9 @@ trait FileUploadTrait
      */
     public function saveFiles(Request $request)
     {
-
-		$uploadPath = public_path(env('UPLOAD_PATH'));
-		$thumbPath = public_path(env('UPLOAD_PATH').'/thumb');
-        if (! file_exists($uploadPath)) {
-            mkdir($uploadPath, 0777);
-            mkdir($thumbPath, 0777);
+        if (! file_exists(public_path('uploads'))) {
+            mkdir(public_path('uploads'), 0777);
+            mkdir(public_path('uploads/thumb'), 0777);
         }
 
         $finalRequest = $request;
@@ -30,10 +27,10 @@ trait FileUploadTrait
                     $filename = time() . '-' . $request->file($key)->getClientOriginalName();
                     $file     = $request->file($key);
                     $image    = Image::make($file);
-                    if (! file_exists($thumbPath)) {
-                        mkdir($thumbPath, 0777, true);
+                    if (! file_exists(public_path('uploads/thumb'))) {
+                        mkdir(public_path('uploads/thumb'), 0777, true);
                     }
-                    Image::make($file)->resize(50, 50)->save($thumbPath . '/' . $filename);
+                    Image::make($file)->resize(50, 50)->save(public_path('uploads/thumb') . '/' . $filename);
                     $width  = $image->width();
                     $height = $image->height();
                     if ($width > $request->{$key . '_max_width'} && $height > $request->{$key . '_max_height'}) {
@@ -47,11 +44,11 @@ trait FileUploadTrait
                             $constraint->aspectRatio();
                         });
                     }
-                    $image->save($uploadPath . '/' . $filename);
+                    $image->save(public_path('uploads') . '/' . $filename);
                     $finalRequest = new Request(array_merge($finalRequest->all(), [$key => $filename]));
                 } else {
                     $filename = time() . '-' . $request->file($key)->getClientOriginalName();
-                    $request->file($key)->move($uploadPath, $filename);
+                    $request->file($key)->move(public_path('uploads'), $filename);
                     $finalRequest = new Request(array_merge($finalRequest->all(), [$key => $filename]));
                 }
             }
