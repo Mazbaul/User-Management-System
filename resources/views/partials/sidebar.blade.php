@@ -12,7 +12,7 @@
                 </a>
             </li>
 
-            
+
             @can('user_management_access')
             <li class="treeview">
                 <a href="#">
@@ -23,7 +23,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                
+                  @can('permission_access')
+                <li class="{{ $request->segment(2) == 'permissions' ? 'active active-sub' : '' }}">
+                        <a href="{{ route('admin.permissions.index') }}">
+                            <i class="fa fa-briefcase"></i>
+                            <span class="title">
+                                @lang('global.permissions.title')
+                            </span>
+                        </a>
+                    </li>
+                @endcan
                 @can('role_access')
                 <li class="{{ $request->segment(2) == 'roles' ? 'active active-sub' : '' }}">
                         <a href="{{ route('admin.roles.index') }}">
@@ -48,9 +57,9 @@
             </li>
             @endcan
 
-            
 
-            
+
+
 
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
                 <a href="{{ route('auth.change_password') }}">

@@ -19,8 +19,8 @@ class User extends Authenticatable
 {
     use Notifiable;
     protected $fillable = ['name', 'email', 'password', 'remember_token', 'role_id'];
-    
-    
+
+
     /**
      * Hash password
      * @param $input
@@ -30,7 +30,7 @@ class User extends Authenticatable
         if ($input)
             $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
     }
-    
+
 
     /**
      * Set to null if empty
@@ -40,12 +40,25 @@ class User extends Authenticatable
     {
         $this->attributes['role_id'] = $input ? $input : null;
     }
-    
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
     
-    
-    
+
+  /**
+   * Hash password
+   * @param $input
+   */
+
+
+  public function isAdmin()
+  {
+      return $this->role()->where('role_id', 1)->first();
+  }
+
+
+
 }
