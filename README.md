@@ -12,7 +12,6 @@ Simple mini-project created for User Management. You can Create Superadmin, admi
 - create permissions using UI
 - Create User you want with different roles and permissions Using Just UI
 
-Note:admin login email:admin@admin.com Password:password
 
 
 ## How to Install
@@ -25,7 +24,7 @@ Note:admin login email:admin@admin.com Password:password
 - php artisan migrate --seed to create and      populate tables
 - php artisan serve to start the app on http://localhost:8000/
 
-
+Note:admin login email:admin@admin.com Password:password
 ### License
 
 Please use and re-use however you want.
